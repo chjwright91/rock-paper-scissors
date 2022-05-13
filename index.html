@@ -33,9 +33,13 @@
             return randomInt;
         }
 
+        
         function finalMessage() {
+            //allows player to play another game or exit the game
+
             let message = prompt('WAIT - DON\'T GO! Do you want to play again? Type \"yes\" or \"no\"');
             message.toLowerCase();
+
             if (message == 'yes') {
                 alert('Let\'s play again!');
                 game();
@@ -47,64 +51,61 @@
         }
 
         function game() {
+            //game play in console
 
             alert('Let\'s play Rock Paper Scissors!\n Best out of five... are you ready?');
 
             let playerScore = 0;
             let computerScore = 0;
 
-            let isWinner = 'You win!';
-            let isLoser = 'You lose!';
-            let isDraw = 'It\'s a draw';
-
             for (let i = 0; i < 5; i++) {
                 let getPlayerChoice = playerSelection();
                 let getComputerChoice = computerSelection();
 
-                // determine a draw
+                let isPlayerChoice = 'You chose ' + getPlayerChoice + ' ';
+                let isDrawGameResult = '(' + getPlayerChoice + ' is ' + getComputerChoice + '). This round is a draw.';
+                let isWinnerGameResult = '(' + getPlayerChoice + ' beats ' + getComputerChoice + '). You win this round.';
+                let isLoserGameResult = '(' + getComputerChoice + ' beats ' + getPlayerChoice + '). You lose this round.';
+
                 if (getPlayerChoice === getComputerChoice) {
-                    playerScore;
-                    computerScore;
-                    console.log('You chose ' + getPlayerChoice + '\n' + getPlayerChoice + ' is ' + getComputerChoice + '\n' + isDraw);
-                    console.log('Scoreboard\nPlayer: ' + playerScore + ' | Computer: ' + computerScore);
-                }
-                
-                // determine player wins
-                if ((getPlayerChoice == 'rock' && getComputerChoice == 'scissors') || 
+                    // determines game round is a draw
+                    
+                    let scoreBoard = '\nPlayer: ' + playerScore + ' | Computer: ' + computerScore;
+                    console.log(isPlayerChoice + isDrawGameResult + scoreBoard);
+
+                } else if (
+                    //determines player wins
+                    (getPlayerChoice == 'rock' && getComputerChoice == 'scissors') || 
                     (getPlayerChoice == 'paper' && getComputerChoice == 'rock') || 
                     (getPlayerChoice == 'scissors' && getComputerChoice == 'paper')) {
                     
-                    console.log('You chose ' + getPlayerChoice + '\n' + getPlayerChoice + ' beats ' + getComputerChoice + '\n' + isWinner);
                     playerScore += 1;
-                    computerScore;
-                    console.log('Scoreboard\nPlayer: ' + playerScore + ' | Computer: ' + computerScore);
-                } 
-                
-                // determine computer wins
-                if ((getPlayerChoice == 'rock' && getComputerChoice == 'paper') || 
-                    (getPlayerChoice == 'paper' && getComputerChoice == 'scissors') || 
-                    (getPlayerChoice == 'scissors' && getComputerChoice == 'rock')) {
+                    let scoreBoard = '\nPlayer: ' + playerScore + ' | Computer: ' + computerScore;
+                    console.log(isPlayerChoice + isWinnerGameResult + scoreBoard);
                     
-                    console.log('You chose ' + getPlayerChoice + '\n' + getComputerChoice + ' beats ' + getPlayerChoice + '\n' + isLoser);
-                    playerScore;
+                } else {
+                    //if not a draw and player does not win
                     computerScore += 1;
-                    console.log('Scoreboard\nPlayer: ' + playerScore + ' | Computer: ' + computerScore);
-                } 
-                
+                    let scoreBoard = '\nPlayer: ' + playerScore + ' | Computer: ' + computerScore;
+                    console.log(isPlayerChoice + isLoserGameResult + scoreBoard);
+
+                }  
             }
 
+            //message output of 5-round game result
             if (playerScore > computerScore) {
                 alert('Winner winner, chicken dinner!');
             } else if (playerScore < computerScore) {
-                alert('You lost this time :(');
+                alert('You lost this game :(');
             } else {
                 alert('No winners or losers here! This game is a draw.');
             }
+
+            finalMessage();
     
         }
 
         game();
-        finalMessage();
         
     </script>
     </body>
