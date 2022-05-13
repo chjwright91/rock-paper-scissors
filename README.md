@@ -1,6 +1,7 @@
 # rock-paper-scissors
+Code written by chjwright91
+Assignment by The Odin Project
 
-Author: chjwright91
 
 Rock Paper Scissors is a classic childhood game where rock beats scissors, scissors beats paper, and paper beats rock. 
 
