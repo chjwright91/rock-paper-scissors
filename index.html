@@ -7,11 +7,13 @@
     <script src="script.js"></script>
     <title>Rock Paper Scissors | TOP Project</title>
 </head>
-<body>
+    <body>
+        <h1>Rock | Paper | Scissors</h1>
+        <p>To view gameplay, you must first click 'Cancel' in the alert box. Then, right-click anywhere on the screen and select "Inspect > Console". Finally, refresh the page and let the games begin!</p>
     <script>
 
         function playerSelection() {
-            let userInput = prompt('Type in your choice to start the game:');
+            let userInput = prompt('Take your pick: Rock | Paper | Scissors');
             return userInput.toLowerCase();
         }
         
@@ -31,41 +33,79 @@
             return randomInt;
         }
 
-        function game() {
-
-            alert('Do you want to play Rock, Paper, Scissors?');
-            let numberOfRounds = prompt('Choose 5 or 10 rounds for this game');
-
-            for (let i = 0; i < 5; i++) 
-            {
-                let playerChoice = playerSelection();
-                let computerChoice = computerSelection();
-
-                let playerIsWinner = 'Player wins';
-                let computerIsWinner = 'Computer wins';
-                let playerIsLoser = 'Player loses';
-                let computerIsLoser = 'Computer loses';
-                let isDraw = 'It\'s a draw';
-            
-                // determine a draw
-                if ((playerChoice == 'rock' && computerChoice == 'rock') || (playerChoice == 'scissors' && computerChoice == 'scissors') || (playerChoice == 'paper' && computerChoice == 'paper')) {
-                     console.log('Player chose ' + playerChoice + ' and computer chose ' + computerChoice + '. ' + isDraw);
-                } 
-
-                // determine player wins and computer loses
-                if ((playerChoice == 'rock' && computerChoice == 'scissors') || (playerChoice == 'paper' && computerChoice == 'rock') || (playerChoice == 'scissors' && computerChoice == 'paper')) {
-                     console.log('Player chose ' + playerChoice + ' and computer chose ' + computerChoice + '. ' + playerIsWinner + ' and ' + computerIsLoser);
-                }
-
-                // determine player loses and computer wins
-                if ((playerChoice == 'rock' && computerChoice == 'paper') || (playerChoice == 'paper' && computerChoice == 'scissors') || (playerChoice == 'scissors' && computerChoice == 'rock')) {
-                     console.log('Player chose ' + playerChoice + ' and computer chose ' + computerChoice + '. ' + playerIsLoser + ' and ' + computerIsWinner);
-                }
+        function finalMessage() {
+            let message = prompt('WAIT - DON\'T GO! Do you want to play again? Type \"yes\" or \"no\"');
+            message.toLowerCase();
+            if (message == 'yes') {
+                alert('Let\'s play again!');
+                game();
+            } else if (message == 'no') {
+                alert('Thanks for playing!');
+            } else {
+                alert('Sorry, I\'m a polite English-speaking robot. If you\'d like to play again, hit the OK button then refresh the page. Thank you for your cooperation.');
             }
         }
 
-        game();
+        function game() {
 
+            alert('Let\'s play Rock Paper Scissors!\n Best out of five... are you ready?');
+
+            let playerScore = 0;
+            let computerScore = 0;
+
+            let isWinner = 'You win!';
+            let isLoser = 'You lose!';
+            let isDraw = 'It\'s a draw';
+
+            for (let i = 0; i < 5; i++) {
+                let getPlayerChoice = playerSelection();
+                let getComputerChoice = computerSelection();
+
+                // determine a draw
+                if (getPlayerChoice === getComputerChoice) {
+                    playerScore;
+                    computerScore;
+                    console.log('You chose ' + getPlayerChoice + '\n' + getPlayerChoice + ' is ' + getComputerChoice + '\n' + isDraw);
+                    console.log('Scoreboard\nPlayer: ' + playerScore + ' | Computer: ' + computerScore);
+                }
+                
+                // determine player wins
+                if ((getPlayerChoice == 'rock' && getComputerChoice == 'scissors') || 
+                    (getPlayerChoice == 'paper' && getComputerChoice == 'rock') || 
+                    (getPlayerChoice == 'scissors' && getComputerChoice == 'paper')) {
+                    
+                    console.log('You chose ' + getPlayerChoice + '\n' + getPlayerChoice + ' beats ' + getComputerChoice + '\n' + isWinner);
+                    playerScore += 1;
+                    computerScore;
+                    console.log('Scoreboard\nPlayer: ' + playerScore + ' | Computer: ' + computerScore);
+                } 
+                
+                // determine computer wins
+                if ((getPlayerChoice == 'rock' && getComputerChoice == 'paper') || 
+                    (getPlayerChoice == 'paper' && getComputerChoice == 'scissors') || 
+                    (getPlayerChoice == 'scissors' && getComputerChoice == 'rock')) {
+                    
+                    console.log('You chose ' + getPlayerChoice + '\n' + getComputerChoice + ' beats ' + getPlayerChoice + '\n' + isLoser);
+                    playerScore;
+                    computerScore += 1;
+                    console.log('Scoreboard\nPlayer: ' + playerScore + ' | Computer: ' + computerScore);
+                } 
+                
+            }
+
+            if (playerScore > computerScore) {
+                alert('Winner winner, chicken dinner!');
+            } else if (playerScore < computerScore) {
+                alert('You lost this time :(');
+            } else {
+                alert('No winners or losers here! This game is a draw.');
+            }
+    
+        }
+
+        game();
+        finalMessage();
+        
     </script>
-</body>
+    </body>
 </html>
